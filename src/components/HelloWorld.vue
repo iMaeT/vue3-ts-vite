@@ -1,11 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-</script>
-
 <template>
   <h1>{{ msg }}</h1>
 
@@ -32,6 +24,25 @@ const count = ref(0)
     <code>components/HelloWorld.vue</code> to test hot module replacement.
   </p>
 </template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+// import { key } from '@/store'
+
+export default defineComponent({
+  setup() {
+    const count = ref(0)
+    const msg = ref('欢迎使用vue3')
+    // console.log(key)
+    return {
+      count,
+      msg
+    }
+  }
+})
+</script>
+
+
 
 <style scoped>
 a {

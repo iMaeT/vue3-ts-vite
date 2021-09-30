@@ -16,9 +16,11 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 ## 启动方式
 
+``` sh
 cd vamp-100
 yarn
 yarn dev
+```
 
 ## 功能
 
@@ -49,6 +51,6 @@ yarn dev
 
 ## 任务列表[Features]
 
- -[x] 完成项目基础插件安装
- -[] 配置路由
- -[] 配置权限
+- [x] 完成项目基础插件安装
+- [] 配置路由
+- [] 配置权限
