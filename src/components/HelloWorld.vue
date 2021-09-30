@@ -27,13 +27,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-// import { key } from '@/store'
+import { key } from '@/store'
 
 export default defineComponent({
   setup() {
     const count = ref(0)
     const msg = ref('欢迎使用vue3')
-    // console.log(key)
+    console.log(key)
     return {
       count,
       msg
