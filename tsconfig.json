@@ -18,7 +18,12 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     // 编译过程中需要引入的库文件的列表。
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
     // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
     "allowSyntheticDefaultImports": true,
     // 解析非相对模块名的基准目录
@@ -28,14 +33,23 @@
     // 忽略所有的声明文件（ *.d.ts）的类型检查。
     "skipLibCheck": true,
     // 要包含的类型声明文件名列表
-    "types": [],
+    "types": [
+      "node"
+    ],
     "isolatedModules": true,
     // 模块名到基于 baseUrl的路径映射的列表。
     "paths": {
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "strictFunctionTypes": false,
+    "allowJs": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
   },
   "include": [
     "src/**/*.ts",
@@ -43,5 +57,8 @@
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

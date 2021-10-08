@@ -1,7 +1,28 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import { store, key } from './store'
+import App from './App.vue' // 入口组件
+
+import router, { setupRouter } from './router' // 路由
+
+import { setupStore } from './store' // 状态管理
+
+import { setupElement } from '@/libs/element' // element UI
+
+import { setupGlobCom } from '@/components' // 全局公用组件
+
+import '@/styles/reset.css' // 重置不同浏览器之间的标签默认样式
+import '@/styles/index.less'
 
 const app = createApp(App)
-app.use(store, key)
-app.mount('#app')
+
+setupRouter(app) // 引入路由
+
+setupStore(app) // 引入状态管理
+
+setupElement(app) // 引入element组件
+
+setupGlobCom(app) // 注册全局公用组件
+
+
+router.isReady().then(() => {
+  app.mount('#app')
+})
