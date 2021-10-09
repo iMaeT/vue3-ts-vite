@@ -354,7 +354,7 @@ export default defineComponent({
     }
   }
 }
-@{deep}(.scrollbar__view) {
+::v-deep(.scrollbar__view) {
   height: @tagsViewHeight;
   line-height: @tagsViewHeight;
 }

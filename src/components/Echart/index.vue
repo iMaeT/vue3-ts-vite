@@ -14,7 +14,6 @@ import type { EChartOption, ECharts } from 'echarts'
 
 // const tdTheme = require('./theme.json') // 引入默认主题
 import * as tdTheme from './theme.json'
-
 echarts.registerTheme('tdTheme', tdTheme) // 覆盖默认主题
 export default defineComponent({
   name: 'Echarts',

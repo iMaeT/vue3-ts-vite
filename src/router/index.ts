@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+// import { getParentLayout } from './utils'
 
 import type { App } from 'vue'
 import type { AppRouteRecordRaw } from "./types"
@@ -50,6 +51,45 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
         }
       }
     ]
+  },
+  {
+    path: '/hooks-demo',
+    component: Layout,
+    redirect: '/hooks-demo/watermark',
+    name: 'HooksDemo',
+    meta: {
+      title: 'Hooks',
+      icon: 'international',
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: 'watermark',
+        component: () => import('@/views/hooks-demo/useWatermark/index.vue'),
+        name: 'UseWatermarkDemo',
+        meta: {
+          title: 'UseWaterMark'
+        }
+      },
+      {
+        path: 'useScrollTo',
+        component: () => import('@/views/hooks-demo/useScrollTo/index.vue'),
+        name: 'UseScrollToDemo',
+        meta: {
+          title: 'UseScrollTo'
+        }
+      }
+    ]
+  },
+  {
+    path: '/404',
+    component: () => import('@/components/Error/404.vue'),
+    name: 'NoFind',
+    meta: {
+      hidden: true,
+      title: '404',
+      noTagsView: true
+    }
   }
 ]
 

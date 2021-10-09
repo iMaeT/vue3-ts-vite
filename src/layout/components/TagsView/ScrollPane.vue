@@ -106,7 +106,7 @@ export default defineComponent({
   white-space: nowrap;
   position: relative;
   width: 100%;
-  @{deep}(.el-scrollbar__wrap) {
+  ::v-deep(.el-scrollbar__wrap) {
     overflow: hidden;
   }
 }

@@ -10,7 +10,7 @@
       >
         <div :class="showAvatar ? 'avatars-item-img' : ['avatars-item', `avatars-${item.type || 'default'}`]">
           <el-avatar v-if="showAvatar" :size="40" :src="item.url">
-            <img :src="() => import('@/assets/img/avatar.png')">
+            <img :src="getImgSrc('avatar')">
           </el-avatar>
           <span v-else>{{ item.text.substr(0, 1) }}</span>
         </div>
@@ -26,7 +26,7 @@
         :class="showAvatar ? 'avatars-item-img' : ['avatars-item', `avatars-${item.type || 'default'}`]"
       >
         <el-avatar v-if="showAvatar" :size="40" :src="item.url">
-          <img :src="() => import('@/assets/img/avatar.png')">
+          <img :src="getImgSrc('avatar')">
         </el-avatar>
         <span v-else>{{ item.text.substr(0, 1) }}</span>
       </div>
@@ -78,9 +78,16 @@ export default defineComponent({
         return props.data
       }
     })
+    // 图片导入
+    const getImgSrc = (name: string) => {
+      const path = `/src/assets/img/${name}.png`
+      const modules = import.meta.globEager('/src/assets/img/*.png')
+      return modules[path].default
+    }
 
     return {
-      avatarsData
+      avatarsData,
+      getImgSrc
     }
   }
 })

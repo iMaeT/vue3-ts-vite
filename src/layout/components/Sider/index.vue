@@ -93,10 +93,10 @@ export default defineComponent({
 <style lang="less" scoped>
 .sidebar-container {
   height: 100%;
-  @{deep}(.svg-icon) {
+  ::v-deep(.svg-icon) {
     margin-right: 16px;
   }
-  @{deep}(.el-scrollbar) {
+  ::v-deep(.el-scrollbar) {
     width: 100%;
     height: 100%;
     .el-scrollbar__wrap {
@@ -114,7 +114,7 @@ export default defineComponent({
 }
 
 .sidebar-container--Top {
-  @{deep}(.el-scrollbar) {
+  ::v-deep(.el-scrollbar) {
     width: 100%;
     height: 100%;
     .el-scrollbar__wrap {

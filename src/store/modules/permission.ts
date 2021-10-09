@@ -3,12 +3,12 @@ import { deepClone } from '@/utils'
 import store from '../index'
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import { AppRouteRecordRaw } from '@/router/types'
-import wsCache from '@/cache'
+// import wsCache from '@/cache'
 import { isExternal } from '@/utils/validate'
 import path from 'path'
 import { getParentLayout } from '@/router/utils'
 
-import { appStore } from '@/store/modules/app'
+// import { appStore } from '@/store/modules/app'
 
 /* Layout */
 const Layout = () => import('@/layout/index.vue')
@@ -43,6 +43,7 @@ class Permission extends VuexModule implements PermissionState {
     }])
     // 渲染菜单的所有路由
     this.routers = deepClone(constantRouterMap, ['component']).concat(routers)
+    console.log(this.routers)
   }
   @Mutation
   private SET_ISADDROUTERS(state: boolean): void {
@@ -143,12 +144,13 @@ function getFilterRoutes(routes: any[]): any[] {
     data.meta = Object.assign({}, route.meta || {}, { title: route.title || route.meta.title })
     if (route.component) {
       // 动态加载路由文件，可根据实际情况进行自定义逻辑
-      data.component = route.component === '#'
-        ? Layout
-        : (route.component.includes('##')
+      data.component =
+        route.component === '#'
+          ? Layout
+          : route.component.includes('##')
           ? getParentLayout(route.component.split('##')[1])
-          // 必须加'.vue'后缀，而不能直接把'.vue'后缀写在component中。否则会报出警告。。
-          : () => import('@/' + route.component + '.vue'))
+          : // 必须加'.vue'后缀，而不能直接把'.vue'后缀写在component中。否则会报出警告。。
+            () => import(/* @vite-ignore */ '@/' + route.component + '.vue')
     }
     // recursive child routes
     if (route.children) {

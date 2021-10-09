@@ -2,7 +2,7 @@
   <el-dropdown class="avatar-container" trigger="hover">
     <div id="user-container">
       <div class="avatar-wrapper">
-        <img :src="() => import('@/assets/img/avatar.png')" class="user-avatar">
+        <img :src="getImgSrc('avatar')" class="user-avatar">
         <span class="name-item">管理员</span>
       </div>
     </div>
@@ -36,9 +36,17 @@ export default defineComponent({
     function toHome() {
       push('/')
     }
+
+    // 图片导入
+    const getImgSrc = (name: string) => {
+      const path = `/src/assets/img/${name}.png`
+      const modules = import.meta.globEager('/src/assets/img/*.png')
+      return modules[path].default
+    }
     return {
       loginOut,
-      toHome
+      toHome,
+      getImgSrc
     }
   }
 })

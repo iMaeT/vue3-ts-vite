@@ -1,6 +1,6 @@
 <template>
   <router-link class="app-logo" to="/" :class="{'app-logo--Top': layout !== 'Classic'}">
-    <img :src="'/assets/img/logo.png'">
+    <img :src="getImgSrc('logo')">
     <div v-if="show" class="sidebar-title">{{ title }}</div>
   </router-link>
 </template>
@@ -21,7 +21,14 @@ export default defineComponent({
     const show = ref<boolean>(true)
     const title = computed(() => appStore.logoTitle)
     const layout = computed(() => appStore.layout)
-    // const logoImgUrl = 
+
+    // 图片导入
+    const getImgSrc = (name: string) => {
+      const path = `/src/assets/img/${name}.png`
+      const modules = import.meta.globEager('/src/assets/img/*.png')
+      return modules[path].default
+    }
+
     watch(
       () => props.collapsed,
       (collapsed: boolean) => {
@@ -41,7 +48,8 @@ export default defineComponent({
     return {
       show,
       title,
-      layout
+      layout,
+      getImgSrc
     }
   }
 })

@@ -6,11 +6,11 @@
     width: @menuTabWidth;
     height: 100%;
     background: @menuTabBg;
-    @{deep}(.is-left::after),
-    @{deep}(.el-tabs__active-bar) {
+    ::v-deep(.is-left::after),
+    ::v-deep(.el-tabs__active-bar) {
       display: none;
     }
-    @{deep}(.el-tabs) {
+    ::v-deep(.el-tabs) {
       height: 100%;
       .el-tabs__header {
         height: 100%;
@@ -39,19 +39,19 @@
     }
     &--top {
       width: auto;
-      @{deep}(.el-tabs),
-      @{deep}(.is-top),
-      @{deep}(.el-tabs__nav-scroll) {
+      ::v-deep(.el-tabs),
+      ::v-deep(.is-top),
+      ::v-deep(.el-tabs__nav-scroll) {
         height: 100%;
       }
-      @{deep}(.is-top::after),
-      @{deep}(.el-tabs__active-bar) {
+      ::v-deep(.is-top::after),
+      ::v-deep(.el-tabs__active-bar) {
         display: none;
       }
-      @{deep}(.is-top) {
+      ::v-deep(.is-top) {
         margin-bottom: 0;
       }
-      @{deep}(.el-tabs__item) {
+      ::v-deep(.el-tabs__item) {
         padding: 0;
         width: @menuTopTabWidth;
         text-align: center;
@@ -60,11 +60,11 @@
         color: @menuTabText;
         transition: all .3s cubic-bezier(.645,.045,.355,1);
       }
-      @{deep}(.el-tabs__item:hover) {
+      ::v-deep(.el-tabs__item:hover) {
         color: @menuTopTabActiveText;
         background: @menuTopTabActiveBg;
       }
-      @{deep}(.is-active) {
+      ::v-deep(.is-active) {
         color: @menuTopTabActiveText;
         background: @menuTopTabActiveBg;
       }
@@ -83,7 +83,7 @@
   }
   .sidebar__wrap--collapsed {
     width: @menuMinWidth;
-    @{deep}(.anticon-item) {
+    ::v-deep(.anticon-item) {
       display: none;
     }
   }
@@ -113,7 +113,7 @@
           bottom: 0;
           left: 0;
         }
-        @{deep}(.hover-container) {
+        ::v-deep(.hover-container) {
           transition: background 0.2s;
           height: 100%;
           line-height: @navbarHeight + 5px;
@@ -130,8 +130,8 @@
           position: absolute;
           top: 0;
           right: 20px;
-          @{deep}(.screenfull-container),
-          @{deep}(.user-container) {
+          ::v-deep(.screenfull-container),
+          ::v-deep(.user-container) {
             line-height: @navbarHeight !important;
           }
         }
@@ -141,7 +141,7 @@
     // content样式
     .main__wrap--content {
       height: 100%;
-      @{deep}(.el-scrollbar__wrap) {
+      ::v-deep(.el-scrollbar__wrap) {
         overflow-x: hidden;
       }
     }
@@ -232,7 +232,7 @@
       display: flex;
       align-items: center;
       height: @topSiderHeight;
-      @{deep}(.hover-container) {
+      ::v-deep(.hover-container) {
         transition: background 0.2s;
         height: 100%;
         line-height: @topSiderHeight;
