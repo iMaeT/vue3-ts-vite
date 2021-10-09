@@ -8,11 +8,13 @@ import config from './config'
 
 const { result_code, base_url } = config
 
-export const PATH_URL: string = base_url[process.env.VUE_APP_CURENV as string]
+// export const PATH_URL: string = base_url[import.meta.env.VUE_APP_CURENV as string]
+export const PATH_URL: string = import.meta.env.VUE_APP_BASE_API as string
 
 // 创建axios实例
 const service: AxiosInstance = axios.create({
   baseURL: PATH_URL, // api 的 base_url
+  withCredentials: true, // 当跨域请求时发送cookie
   timeout: config.request_timeout // 请求超时时间
 })
 

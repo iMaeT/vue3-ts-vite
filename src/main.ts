@@ -5,6 +5,8 @@ import router, { setupRouter } from './router' // 路由
 
 import { setupStore } from './store' // 状态管理
 
+import './permission' // 路由守卫
+
 import { setupElement } from '@/libs/element' // element UI
 
 import { setupGlobCom } from '@/components' // 全局公用组件

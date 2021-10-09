@@ -125,6 +125,11 @@
   dependencies:
     "@types/zrender" "*"
 
+"@types/js-cookie@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmmirror.com/@types/js-cookie/download/@types/js-cookie-3.0.0.tgz#6dcc3ab167251ace6964310789d8ea80f732a82c"
+  integrity sha1-bcw6sWclGs5pZDEHidjqgPcyqCw=
+
 "@types/json-schema@^7.0.7":
   version "7.0.9"
   resolved "https://registry.nlark.com/@types/json-schema/download/@types/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
@@ -899,7 +904,7 @@ echarts@^4.9.0:
   dependencies:
     zrender "4.3.2"
 
-element-plus@^1.1.0-beta.19:
+element-plus@1.1.0-beta.19:
   version "1.1.0-beta.19"
   resolved "https://registry.npmmirror.com/element-plus/download/element-plus-1.1.0-beta.19.tgz#234f3bc3f1d822a7102045e7ee1239b675f27acc"
   integrity sha1-I087w/HYIqcQIEXn7hI5tnXyesw=
@@ -1748,6 +1753,11 @@ js-base64@^2.1.9:
   version "2.6.4"
   resolved "https://registry.npmmirror.com/js-base64/download/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
   integrity sha1-9OaGxd4eofhn28rT1G2WlCjfmMQ=
+
+js-cookie@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.nlark.com/js-cookie/download/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha1-njm0xsL1ZWNwjX0x9vXyGHOpJBQ=
 
 js-stringify@^1.0.2:
   version "1.0.2"

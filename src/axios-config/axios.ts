@@ -14,8 +14,17 @@ interface Config {
   headersType?: string
   responseType?: ResponseType
 }
+interface HttpResonse {
+  status: number
+  statusText: string
+  data: {
+    code: number
+    msg: string
+    [key: string]: any
+  }
+}
 
-function fetch({ url, method, params, data, headersType, responseType }: Config): AxiosPromise {
+function fetch({ url, method, params, data, headersType, responseType }: Config): AxiosPromise<HttpResonse> {
   return request({
     url: url,
     method,

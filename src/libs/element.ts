@@ -175,7 +175,6 @@ const components = [
 const plugins = [
   ElInfiniteScroll,
   ElLoading,
-  // ElMessage,
   ElMessageBox,
   ElNotification
 ]

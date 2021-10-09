@@ -53,6 +53,16 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
     ]
   },
   {
+    path: '/login',
+    component: () => import('@/views/login/index.vue'),
+    name: 'Login',
+    meta: {
+      hidden: true,
+      title: '登录',
+      noTagsView: true
+    }
+  },
+  {
     path: '/hooks-demo',
     component: Layout,
     redirect: '/hooks-demo/watermark',
