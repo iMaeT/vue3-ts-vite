@@ -1,14 +1,13 @@
 import { fetch } from '@/axios-config/axios'
 
-import type { PropsData } from './types'
-
 const accountBaseUrl = '/api/account/'
 const userBaseUrl = '/api/base/'
 
 // 登录
-export const login = ({ data }: PropsData) =>  {
+export const loginApi = ({ data }: PropsData) =>  {
   return fetch({
     url: `${accountBaseUrl}login`,
+    // url: '/user/login',
     method: 'post',
     data
   })
@@ -25,7 +24,7 @@ export const getInfo = ({ params }: PropsData) => {
 
 // 退出登录
 
-export const logout = ({ data }: PropsData) => {
+export const logoutApi = ({ data }: PropsData) => {
   return fetch({
     url: `${accountBaseUrl}logout`,
     method: 'post',

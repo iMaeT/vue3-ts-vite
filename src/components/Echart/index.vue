@@ -1,6 +1,7 @@
 <template>
   <div
     ref="chartRef"
+    id="echarts"
     :class="className"
     :style="{height: height, width: width}"
   />
@@ -37,6 +38,7 @@ export default defineComponent({
   },
   setup(props) {
     const chartRef = ref<HTMLCanvasElement | null>(null)
+    const chartDom = ref<HTMLDivElement | null>(null)
     let chart: ECharts | null = null
     let sidebarElm: HTMLElement | any = null
     let __resizeHandler: Function | null = null
@@ -84,8 +86,11 @@ export default defineComponent({
     function initChart(): void {
       // 初始化echart
       const chartRefWrap = unref(chartRef)
+      chartDom.value = document.getElementById('echarts') as HTMLDivElement
       if (chartRefWrap) {
-        chart = echarts.init(chartRefWrap, 'tdTheme')
+        // chart = echarts.init(chartRefWrap, 'tdTheme')
+        chart = echarts.init(chartDom.value, 'tdTheme')
+        console.log(echarts)
         chart.setOption(props.options as EChartOption, true)
       }
     }

@@ -49,6 +49,7 @@ export default defineComponent({
   setup() {
     const { currentRoute, push } = useRouter()
     const routers = computed((): RouteRecordRaw[] => {
+      console.log(123)
       return permissionStore.routers
     })
     const activeMenu = computed(() => {

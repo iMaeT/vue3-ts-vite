@@ -3,7 +3,7 @@ import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-dec
 import { resetRouter } from '@/router'
 
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, logout, getInfo } from '@/api/user'
+import { loginApi, logoutApi, getInfo } from '@/api/user'
 import {
   fetchGradeList,
   fetchSemesterList,
@@ -12,34 +12,37 @@ import {
   fetchSemesterExamYear
 } from '@/api/public'
 import tokenKeys from '@/api/token'
+import { App } from 'vue-demi'
+const { resKey, resCheck } = tokenKeys
 
-export interface UserState {
-  token: string | undefined // 令牌
-  id: number | null // 用户id
-  name: string // 名字
-  gender: number | null // 性别 （男（1）女（0）） 默认1
-  schoolId: number | null // 学校id
-  schoolName: string // 学校名称
-  // grade: [] // 年级列表
-  // semesterList: [] // 列学期
-  // nationList: [] // 列民族
-  examYear: number | null // 当前学年
-  semester: number | null // 当前学期
+interface FormModule {
+  userName: string,
+  passWord: string
 }
 
+// interface UserState {
+//   token: string // 令牌
+//   id: number // 用户id
+//   name: string // 名字
+//   gender: number // 性别 （男（1）女（0）） 默认1
+//   schoolId: number // 学校id
+// }
+
 @Module({ dynamic: true, namespaced: true, store, name: 'user' })
-class User extends VuexModule implements UserState {
-  public token = getToken(); // 令牌
-  public id: number; // 用户id
-  public name = '' // 名字
-  public gender: number; // 性别 （男（1）女（0）） 默认1
-  public schoolId: number;// 学校id
-  public schoolName = '' // 学校名称
-  // public grade = [] // 年级列表
-  // public semesterList = [] // 列学期
-  // public nationList: [] // 列民族
-  public examYear: number // 当前学年
-  public semester: number // 当前学期
+class User extends VuexModule {
+  public token: string | undefined = getToken() // 令牌
+  public id: number | null = null // 用户id
+  public name: string = '' // 名字
+  public gender: number | null = null // 性别 （男（1）女（0）） 默认1
+  public schoolId: number | null = null// 学校id
+
+  private resetState(): void {
+    this.token = getToken()
+    this.id = null
+    this.name = ''
+    this.schoolId = null
+    this.gender = null
+  }
 
   @Mutation
   private SET_TOKEN(token: string): void {
@@ -70,54 +73,76 @@ class User extends VuexModule implements UserState {
   private SET_SCHOOLID(schoolId: number): void {
     this.schoolId = schoolId
   }
-  @Mutation
-  private SET_SCHOOLNAME(name: string): void {
-    this.schoolName = name
+
+  @Action
+  // 用户登录
+  public login(userInfo: FormModule): Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      loginApi({ data: userInfo }).then(response => {
+        const { data } = response.data // data:为服务器返回数据的data
+        // 判断是否从响应头信息拿token (若从响应头获取token,key为全小写)
+        const token = resCheck ? response.headers[resKey.toLocaleLowerCase()] : data.token
+        if (!token) {
+          reject('登录失败，请重试！')
+        } else {
+          this.SET_TOKEN(token) // 保存token状态
+          setToken(token) // 写入cookie
+          resolve(data)
+        }
+      }).catch(error => {
+        // login failed
+        reject(error)
+      })
+    })
   }
-  // @Mutation
-  // private SET_GRADE(grade: any[]): void {
-  //   this.grade = grade
-  // }
-  // @Mutation
-  // private SET_SEMESTERLIST(semesterList: any[]): void {
-  //   this.semesterList = semesterList
-  // }
-  @Mutation
-  private SET_EXAMYEAR(examYear: number): void {
-    this.examYear = examYear
+  // 获取用户信息
+  @Action
+  public getUserInfo(token?: string): Promise<unknown> {
+    if (token) {
+      this.SET_TOKEN(token) // 保存token状态
+      setToken(token) // 写入cookie
+    }
+    return new Promise((resolve, reject) => {
+      getInfo({}).then(response => {
+        const { data } = response.data
+        if (!data) {
+          return reject('Verification failed, please Login again.')
+        }
+        const { user, avatar, permissions: roles } = data
+        const { id, name, gender, schoolId } = user
+        this.SET_ID(id)
+        this.SET_NAME(name)
+        this.SET_GENDER(gender)
+        this.SET_SCHOOLID(schoolId)
+
+        resolve(data)
+      }).catch(err => reject(err))
+    })
   }
-  @Mutation
-  private SET_SEMESTER(semester: number): void {
-    this.semester = semester
+  // 用户注销
+  @Action
+  public logout():Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      logoutApi({}).then(() => {
+        removeToken() // 必须先 remove  token
+        resetRouter() // 重置路由
+        this.resetState() // 重置 user 状态
+        resolve(null)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+  // 删除 token
+  @Action
+  public resetToken(): Promise<unknown>{
+    return new Promise(resolve => {
+      removeToken() // 必须先 remove  token
+      resetRouter() // 重置路由
+      this.resetState() // 重置 user 状态
+      resolve(null)
+    })
   }
 }
 
-
-const { resKey, resCheck } = tokenKeys
-
-const state = {
-  // token: getToken(), // 令牌
-  // id: null, // 用户id
-  // name: '', // 名字
-  // code: '', // 证件号
-  // codeType: '', // 证件类型
-  // gender: 1, // 性别 （男（1）女（0）） 默认1
-  // birthday: '', // 生日
-  // schoolId: null, // 学校id
-  // schoolName: '', // 学校名称
-  // status: '', // 管理员、教师、学生
-  // phone: '', // 电话
-  // email: '', // 邮箱
-  // address: '', // 住址
-  // nation: '', // 民族
-  // enable: null, // 是否有效 1有效 0无效
-  // createTime: '', // 创建时间
-  // description: '', // 备注
-  // avatar: boy_avatar, // 头像
-  // roles: [], // 权限
-  // grade: [], // 年级列表
-  // semesterList: [], // 列学期
-  // nationList: [], // 列民族
-  // examYear: null, // 当前学年
-  // semester: null, // 当前学期
-}
+export const UserStore = getModule<User>(User)

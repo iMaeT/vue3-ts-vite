@@ -63,7 +63,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { permissionStore } from '@/store/modules/permission'
 import { ElNotification } from 'element-plus'
 
-import { loginApi, getRoleDetApi } from '@/api/user'
+import { loginApi } from '@/api/user'
 
 interface FormModule {
   userName: string,
@@ -105,23 +105,24 @@ export default defineComponent({
           if (valid) {
             // 模拟登录接口之后返回角色信息
             const res = await loginApi({ data: form })
-            if (res) {
-              // 获取权限信息
-              const role = await getRoleDetApi({
-                params: {
-                  id: res.data.roleId
-                }
-              })
-              if (role) {
-                permissionStore.GenerateRoutes().then(() => {
-                  permissionStore.addRouters.forEach(async(route: RouteRecordRaw) => {
-                    await addRoute(route.name!, route) // 动态添加可访问路由表
-                  })
-                  permissionStore.SetIsAddRouters(true)
-                  push({ path: redirect.value || '/' })
-                })
-              }
-            }
+            // if (res) {
+            //   // 获取权限信息
+            //   const role = await getRoleDetApi({
+            //     params: {
+            //       id: res.data.roleId
+            //     }
+            //   })
+            //   if (role) {
+            //     permissionStore.GenerateRoutes().then(() => {
+            //       permissionStore.addRouters.forEach(async(route: RouteRecordRaw) => {
+            //         await addRoute(route.name!, route) // 动态添加可访问路由表
+            //       })
+            //       permissionStore.SetIsAddRouters(true)
+            //       push({ path: redirect.value || '/' })
+            //     })
+            //   }
+            // }
+            push({ path: redirect.value || '/' })
           } else {
             console.log('error submit!!')
             return false
@@ -153,7 +154,7 @@ export default defineComponent({
 .login-wrap {
   width: 100%;
   height: 100%;
-  background-image: url('~@/assets/img/login-bg.jpg');
+  background-image: url('/img/login-bg.jpg');
   background-size: cover;
   background-position: center;
   position: relative;

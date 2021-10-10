@@ -11,10 +11,17 @@ function resolve(dir) {
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
+  // https://cn.vitejs.dev/config/#mode
+  // https://github.com/vitejs/vite/issues/2723
+  define: {
+    'process.platform': null,
+    'process.version': null
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'localhost:3000',
+        // target: 'localhost:3000',
+        target: 'http://220.160.52.164:8213',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }

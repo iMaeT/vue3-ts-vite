@@ -27,7 +27,7 @@
 import { defineComponent, ref, unref } from 'vue'
 import { useScrollTo } from '@/hooks/useScrollTo'
 export default defineComponent({
-  // name: 'UseScrollToDemo',
+  name: 'UseScrollToDemo',
   setup() {
     const scrollContainer = ref<HTMLElement | null>(null)
 

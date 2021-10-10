@@ -17,7 +17,7 @@
 import { defineComponent } from 'vue'
 import { useWatermark } from '@/hooks/useWaterMark'
 export default defineComponent({
-  // name: 'UseWatermarkDemo',
+  name: 'UseWatermarkDemo',
   setup() {
     const { setWatermark, clear } = useWatermark()
     return {

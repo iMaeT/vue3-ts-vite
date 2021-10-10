@@ -106,7 +106,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 export const asyncRouterMap: AppRouteRecordRaw[] = []
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   strict: true,
   routes: constantRouterMap as RouteRecordRaw[]
 })

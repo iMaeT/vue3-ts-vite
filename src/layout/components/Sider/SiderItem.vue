@@ -9,7 +9,7 @@
       </el-menu-item>
     </template>
 
-    <el-submenu
+    <el-sub-menu
       v-else
       :popper-class="layout !== 'Top'
         ? 'nest-popper-menu'
@@ -27,7 +27,7 @@
         :layout="layout"
         :base-path="resolvePath(child.path)"
       />
-    </el-submenu>
+    </el-sub-menu>
   </template>
 </template>
 
@@ -39,6 +39,7 @@ import { isExternal } from '@/utils/validate'
 import Item from './Item.vue'
 import { permissionStore } from '@/store/modules/permission'
 import { appStore } from '@/store/modules/app'
+
 export default defineComponent({
   name: 'SiderItem',
   components: { Item },
@@ -62,6 +63,8 @@ export default defineComponent({
     }
   },
   setup(props) {
+    console.log(props.item)
+
     const onlyOneChild = ref<any>(null)
 
     const activeTab = computed(() => permissionStore.activeTab)
@@ -96,6 +99,7 @@ export default defineComponent({
       if (isExternal(routePath)) {
         return routePath
       }
+      console.log(path.resolve(otherPath || props.basePath, routePath))
       return path.resolve(otherPath || props.basePath, routePath)
     }
     return {

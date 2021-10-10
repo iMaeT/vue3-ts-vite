@@ -1,7 +1,5 @@
 import { fetch } from '@/axios-config/axios'
 
-import type { PropsData } from './types'
-
 const baseUrl = '/api/base'
 
 // 获取学校年级

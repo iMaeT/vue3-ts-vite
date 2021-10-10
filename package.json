@@ -1,6 +1,6 @@
 {
-  "name": "vapm-100",
-  "version": "0.0.0",
+  "name": "apm-100",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -37,6 +37,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^7.18.0",
     "less": "^3.0.4",
+    "path": "^0.12.7",
     "prettier": "^2.4.1",
     "svg-sprite-loader": "^6.0.9",
     "typescript": "^4.4.3",
